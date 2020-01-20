@@ -1,0 +1,20 @@
+spring:
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  cloud:
+    # RocketMQ 相关配置
+    stream:
+      rocketmq:
+        binder:
+          name-server: 192.168.75.129:9876
+      bindings:
+        #自定义的名称 # test-group(一级分类)
+        test-group: {destination: test-group,content-type: application/json}
+        # consumer.maxAttempts
+        # 消息最大可以被尝试消费的次数，包含第一次投递
+        # 设为 1，表示不重试，注意该值必须大于 0
+        input-consumer: {destination: test-group, content-type: text/plain,
+                         group: test-group, consumer.maxAttempts: 1}
+
+
